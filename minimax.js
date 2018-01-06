@@ -1,4 +1,15 @@
 
+
+/* 
+
+Uncomment these lines to use with jsc
+var Console = function () {
+    this.log = function(msg){ debug(msg) }; 
+};
+
+var console = new Console();
+*/
+
 // board object
 function Board(){
 	this.size = 3;
@@ -104,13 +115,13 @@ function Board(){
 	// display current board state
 	this.show = function(){
 
-		writeln(' -----');
-		writeln('Player ' +this.turn + '\'s turn');
-		writeln(' ----- ')
-		writeln('|' + this.positions[0] + '|');
-		writeln('|' + this.positions[1]+ '|');
-		writeln('|' +this.positions[2]+ '|');
-		writeln(' ----- ')
+		console.log(' -----');
+		console.log('Player ' +this.turn + '\'s turn');
+		console.log(' ----- ')
+		console.log('|' + this.positions[0] + '|');
+		console.log('|' + this.positions[1]+ '|');
+		console.log('|' +this.positions[2]+ '|');
+		console.log(' ----- ')
 	}
 
 }
@@ -187,8 +198,10 @@ var str = '';
 		}
 		str += '{' + arr[i] + '}';
 	}
-writeln(str);
+console.log(str);
 }
+
+
 
 // test code
 var b = new Board();
@@ -218,5 +231,6 @@ b.turn = 2;
 
 b.show();
 showMoves(max(b,0));
+
 
 
