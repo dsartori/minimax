@@ -1,5 +1,4 @@
 
-
 /* 
 
 Uncomment these lines to use with jsc
@@ -13,9 +12,11 @@ var console = new Console();
 // board object
 function Board(){
 	this.size = 3;
-	this.positions =   [[0,0,0],
+	this.positions =   [
 					   [0,0,0],
-					   [0,0,0]];
+					   [0,0,0],
+					   [0,0,0]
+					   ];
 	this.turn = 1;
 
 	// method to return all possible moves for current board
@@ -110,6 +111,7 @@ function Board(){
 	this.move = function(x,y){
 		this.positions[y][x] = this.turn;
 		this.nextTurn();
+
 	}
 
 	// display current board state
@@ -128,6 +130,9 @@ function Board(){
 
 // Negamax implementation
 function max(board,depth){
+
+	// check board state
+	// function returns integer game result value if game is over
 	var result = board.gameOver();
 	if (result == 3){
 		return 0;
@@ -138,30 +143,39 @@ function max(board,depth){
 		}else{
 			return -1;
 		}
-	}else{
+	}else{ // if the game isn't over, keep searching for a finished game
+
+		// initialize variables
 		var outcome;
 		var bestScore = -1000;
 		var bestMoves = [];
 
+		// get list of possible moves
 		var moves = copy(board.possibleMoves());
+
+		// loop through list of moves
 		for (var i=0; i < moves.length; i++ ){
-			var b = clone(board);
-			// apply this move and evaluate
+
+			// apply this move to a new board and evaluate
 			var x = moves[i][0];
 			var y = moves[i][1];
+
+			var b = clone(board);
 			b.move(x,y);
 			// look ahead to final outcome of this move
 			outcome = -max(b,depth+1);
-			// evaluate outcome vs. other moves
+
+			// evaluate outcome vs. existing best outcome
 			if (outcome == bestScore){
 				bestMoves.push(copy(moves[i]));
 			}
-			if(outcome > bestScore){
+			if(outcome > bestScore){ 
 				bestMoves = [];
 				bestMoves.push(copy(moves[i]));
 				bestScore = outcome;
 			}
 		}
+
 		if (depth === 0){
 			return bestMoves;
 		}else{
@@ -190,6 +204,8 @@ function clone(obj){
 	return temp;
 }
 
+
+// display possible moves
 function showMoves(arr){
 var str = '';
 	for (var i = 0; i < arr.length ; i++){
@@ -200,7 +216,7 @@ var str = '';
 	}
 console.log(str);
 }
-
+/*
 
 
 // test code
@@ -231,6 +247,5 @@ b.turn = 2;
 
 b.show();
 showMoves(max(b,0));
-
-
+*/
 
