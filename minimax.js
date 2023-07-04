@@ -1,22 +1,10 @@
 
-/* 
-
-Uncomment these lines to use with jsc
-var Console = function () {
-    this.log = function(msg){ debug(msg) }; 
-};
-
-var console = new Console();
-*/
-
 // board object
 function Board(){
 	this.size = 3;
-	this.positions =   [
+	this.positions =   [[0,0,0],
 					   [0,0,0],
-					   [0,0,0],
-					   [0,0,0]
-					   ];
+					   [0,0,0]];
 	this.turn = 1;
 
 	// method to return all possible moves for current board
@@ -214,7 +202,7 @@ var str = '';
 		}
 		str += '{' + arr[i] + '}';
 	}
-console.log(str);
+//console.log(str);
 }
 /*
 

@@ -67,7 +67,7 @@ function squareClicked(sqr) {
 
 
 			var m = Math.floor((Math.random() * result.length));
-			console.log(result[m]);
+			// console.log(result[m]);
 			coords = result[m];
 			var gPosition = translateCoords(coords[0],coords[1]);
 			document.getElementById(gPosition).firstChild.className = 'O-marker';
@@ -79,20 +79,6 @@ function squareClicked(sqr) {
 			console.log ("Game over: " + result);
 		}
 
-		// Two-player game code
-
-		/*
-		// update the current player value
-		if(player === 'X') {
-			document.getElementById('X').removeAttribute('class');
-			document.getElementById('O').className = 'current-player';
-
-
-		} else {
-			document.getElementById('O').removeAttribute('class');
-			document.getElementById('X').className = 'current-player';
-		}*/
-
 	}
 }
 
@@ -100,62 +86,13 @@ function squareClicked(sqr) {
 
 // translate coordinates to ordinal system
 function translateCoords(x,y){
-
-	if (y == 0){
-		switch (x){
-			case 0:
-				return 0;
-			case 1:
-				return 1;
-			case 2:
-				return 2;
-		}
-	}
-	if (y ==1){
-		switch (x){
-			case 0:
-				return 3;
-			case 1:
-				return 4;
-			case 2:
-				return 5;
-		}
-	}
-	if (y ==2){
-		switch (x){
-			case 0:
-				return 6;
-			case 1:
-				return 7;
-			case 2:
-				return 8;
-		}
-	}
+	return (y*3 + x)
 }
 
 // translate ordinal to coordinate system
 function translateOrdinals(z){
 	// board positions are y,x
-	switch(parseInt(z)){
-		case 0:
-			return [0,0];
-		case 1:
-			return [1,0];
-		case 2:
-			return [2,0];
-		case 3:
-			return [0,1];
-		case 4:
-			return [1,1];
-		case 5:
-			return [2,1];
-		case 6:
-			return [0,2];
-		case 7:
-			return [1,2];
-		case 8:
-			return [2,2];
-	}
+	return [z%3,Math.floor(z/3)]
 }
 
 function restoreBoard(arr) {
